@@ -101,7 +101,7 @@ class ListActivity : ComponentActivity() {
 								}
 
 								Screen.ProfilePageScreen -> {
-									ProfileScreen()
+									ProfileScreen(context = ctx)
 								}
 							}
 						}
