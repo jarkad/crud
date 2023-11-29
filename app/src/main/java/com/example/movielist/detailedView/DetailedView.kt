@@ -41,8 +41,7 @@ import com.example.movielist.list.jostFont
 
 @Composable
 fun DetailedView(
-	movieId: String,
-	viewModel: DetailedViewModel = DetailedViewModel(movieId, MovieRepository())
+	movieId: String, viewModel: DetailedViewModel = DetailedViewModel(movieId, MovieRepository())
 ) {
 
 	val movie by viewModel.movieLiveData.observeAsState()
@@ -69,16 +68,13 @@ fun DetailedView(
 					.border(0.dp, Color.Black, RoundedCornerShape(20.dp))
 			)
 			Row(
-				modifier = Modifier
-					.fillMaxWidth(),
+				modifier = Modifier.fillMaxWidth(),
 				verticalAlignment = Alignment.CenterVertically,
 				horizontalArrangement = Arrangement.SpaceBetween
 			) {
 
 				Name(name = movie!!.name)
-				if (movie!!.rating != null) {
-					Rating(rating = movie!!.rating!!)
-				}
+				Rating(rating = movie!!.rating)
 			}
 
 
@@ -102,14 +98,12 @@ fun DetailedView(
 
 
 
-			if (movie!!.description != null) {
-				Description(description = movie!!.description!!)
-			}
+			Description(description = movie!!.description)
 
 			Spacer(Modifier.height(10.dp))
 
-			if (!movie!!.actors.isNullOrEmpty()) {
-				Actors(actors = movie!!.actors!!)
+			if (movie!!.actors.isNotEmpty()) {
+				Actors(actors = movie!!.actors)
 			}
 
 
