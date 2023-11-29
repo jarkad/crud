@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "709999706824",
-    "firebase_url": "https://guitar-store-d9d16-default-rtdb.firebaseio.com",
-    "project_id": "guitar-store-d9d16",
-    "storage_bucket": "guitar-store-d9d16.appspot.com"
+    "project_number": "354102348861",
+    "project_id": "wiut-store",
+    "storage_bucket": "wiut-store.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:709999706824:android:1d8d9fef2e0ebdd0255bfd",
+        "mobilesdk_app_id": "1:354102348861:android:4fd3a9ca65ed44ec736e54",
         "android_client_info": {
           "package_name": "com.example.movielist"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCTaGFD4Em_y0OLzevNX3fzrpmpiu4HGXo"
+          "current_key": "AIzaSyDFjRO_ODtmFT3LQJhuiMHvpaSoKPO5MBY"
         }
       ],
       "services": {
