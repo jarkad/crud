@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Movie List</string>
+    <string name="title_activity_list">List of movies</string>
+    <string name="btn_add_new_movie">Add new movie</string>
+    <string name="btn_go_player">Go to Player</string>
+    <string name="title_activity_add_new_movie">Add New Movie</string>
+    <string name="movie_name_input_hint">Enter movie name</string>
+    <string name="movie_desc_input_hint">Enter movie description</string>
+    <string name="movie_release_date_input_label">Enter movie release date in the correct format:</string>
+    <string name="movie_release_date_input_hint">YYYY-MM-DD</string>
+    <string name="movie_budget_input_hint">Movie budget in mlns (enter whole number)</string>
+    <string name="add_new_actors_input_hint">Enter actor names, separate them by comma</string>
+    <string name="movie_rating_menu_hint">Movie rating</string>
+    <string name="movie_all_fields_compulsory_warning">All fields are compulsory!</string>
+    <string name="movie_date_format_incorrect_warning">Date format incorrect</string>
+    <string name="save_btn_text">Save</string>
+    <string name="profile_page_placeholder">Player will be here</string>
+    <string name="saved_success_msg">Saved</string>
+    <string name="saved_fail_msg">Failed to save</string>
+    <string name="title_activity_add_new">AddNewActivity</string>
+    <string name="detailed_view_budget_label">Budget: \u0024%1$s million </string>
+    <string name="detailed_view_release_date_label">Release date: %1$s </string>
+    <string name="cinema_icon_desc">Cinema</string>
+</resources>
