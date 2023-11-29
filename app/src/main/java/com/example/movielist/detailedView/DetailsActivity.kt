@@ -1,4 +1,4 @@
-package com.example.movielist
+package com.example.movielist.detailedView
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

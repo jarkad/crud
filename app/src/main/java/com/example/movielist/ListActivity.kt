@@ -26,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.example.movielist.addNew.AddNewMovie
+import com.example.movielist.detailedView.DetailsActivity
 import com.example.movielist.list.MoviesList
 import com.example.movielist.navigation.Screen
 import com.example.movielist.profile.ProfileScreen

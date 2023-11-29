@@ -21,5 +21,9 @@
     <string name="detailed_view_budget_label">Budget: \u0024%1$s million </string>
     <string name="detailed_view_release_date_label">Release date: %1$s </string>
     <string name="cinema_icon_desc">Cinema</string>
+    <string name="btn_go_home">Home</string>
+    <string name="btn_buy">Buy</string>
+    <string name="banner_icon">banner.png</string>
+    <string name="btn_go_search">Search</string>
 	<string name="title_activity_details">Details</string>
 </resources>
