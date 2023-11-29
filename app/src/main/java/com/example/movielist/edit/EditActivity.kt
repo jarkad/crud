@@ -20,8 +20,7 @@ class EditActivity : ComponentActivity() {
 					modifier = Modifier.fillMaxSize(),
 					color = MaterialTheme.colorScheme.background
 				) {
-//					EditMovie(movieId = movieId)
-					EditMovie()
+					EditMovie(movieId)
 				}
 			}
 		}

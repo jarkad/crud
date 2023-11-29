@@ -39,20 +39,27 @@ import java.util.Locale
 
 @Composable
 fun EditMovie(
-	viewModel: EditMovieViewModel = EditMovieViewModel(MovieRepository())
+	movieId: String,
+	viewModel: EditMovieViewModel = EditMovieViewModel(MovieRepository()),
 ) {
 	val localContext = LocalContext.current
 
-	val name = remember { mutableStateOf("") }
-	val description = remember { mutableStateOf("") }
-	val budget = remember { mutableStateOf("") }
-	val releaseDate = remember { mutableStateOf("") }
-	val actors = remember { mutableStateOf("") }
+	viewModel.getMovieById(movieId)
+
+	val initialMovie by viewModel.movieLiveData.observeAsState()
+
+	if (initialMovie == null) return
+
+	val name = remember { mutableStateOf(initialMovie!!.name) }
+	val description = remember { mutableStateOf(initialMovie!!.description) }
+	val budget = remember { mutableStateOf(initialMovie!!.budget.toString()) }
+	val releaseDate = remember { mutableStateOf(initialMovie!!.releaseDate) }
+	val actors = remember { mutableStateOf(initialMovie!!.actors.joinToString(", ")) }
 	val ratingOptions = listOf("1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5")
 	val isRatingExpanded = remember {
 		mutableStateOf(false)
 	}
-	val selectedRatingText = remember { mutableStateOf(ratingOptions[0]) }
+	val selectedRatingText = remember { mutableStateOf(initialMovie!!.rating.toString()) }
 
 	val response by viewModel.insertResponseLiveData.observeAsState()
 
@@ -90,6 +97,7 @@ fun EditMovie(
 			Spacer(Modifier.height(16.dp))
 			SaveButton {
 				val constructedMovie: Movie? = constructMovieIfInputValid(
+					id = movieId,
 					nameInput = name.value,
 					descriptionInput = description.value,
 					budgetInput = budget.value,
@@ -306,6 +314,7 @@ private fun SaveButton(onClick: () -> Unit) {
 }
 
 private fun constructMovieIfInputValid(
+	id: String = "",
 	nameInput: String?,
 	descriptionInput: String?,
 	budgetInput: String?,
@@ -341,6 +350,7 @@ private fun constructMovieIfInputValid(
 	}
 
 	return Movie(
+		id = id,
 		name = nameInput,
 		description = descriptionInput,
 		actors = actorsInput.split(","),
