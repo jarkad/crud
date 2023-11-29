@@ -32,8 +32,8 @@ import com.example.movielist.edit.EditActivity
 
 @Composable
 fun ProfileScreen(
-	viewModel: ProfileScreenViewModel = ProfileScreenViewModel(MovieRepository()),
 	context: Context,
+	viewModel: ProfileScreenViewModel = ProfileScreenViewModel(MovieRepository()),
 ) {
 	val movies by viewModel.movies.observeAsState()
 
@@ -58,9 +58,11 @@ fun ProfileScreen(
 			text = "MY PRODUCTS",
 		)
 		if (!movies.isNullOrEmpty()) {
-			LazyColumn(Modifier.fillMaxWidth()) {
+			LazyColumn(
+				modifier = Modifier.fillMaxWidth(),
+			) {
 				items(items = movies!!.toList()) { movie ->
-					Item(movie, context)
+					Item(movie, context, viewModel)
 				}
 			}
 		}
@@ -68,7 +70,7 @@ fun ProfileScreen(
 }
 
 @Composable
-private fun Item(movie: Movie, context: Context) {
+private fun Item(movie: Movie, context: Context, viewModel: ProfileScreenViewModel) {
 	ElevatedCard(
 		modifier = Modifier.padding(8.dp),
 	) {
@@ -88,13 +90,14 @@ private fun Item(movie: Movie, context: Context) {
 					OutlinedButton(onClick = {
 						context.startActivity(
 							Intent(
-								context,
-								EditActivity::class.java
+								context, EditActivity::class.java
 							).putExtra("movieId", movie.id)
 						)
 					}) { Text("EDIT") }
 					Spacer(modifier = Modifier.padding(8.dp))
-					Button(onClick = { /*TODO*/ }) { Text("DELETE") }
+					OutlinedButton(onClick = {
+						viewModel.deleteMovie(movie.id)
+					}) { Text("DELETE") }
 				}
 			}
 		}

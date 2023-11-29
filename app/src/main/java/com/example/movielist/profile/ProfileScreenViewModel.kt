@@ -14,7 +14,19 @@ class ProfileScreenViewModel(
 
 	init {
 		viewModelScope.launch {
-			movies.value = repository.getMovieList()
+			updateMovieList()
 		}
+	}
+
+	fun deleteMovie(movieId: String) {
+		viewModelScope.launch {
+			repository.delete(movieId)
+			updateMovieList()
+		}
+	}
+
+	private suspend fun updateMovieList() {
+		movies.value = repository.getMovieList()
+
 	}
 }
