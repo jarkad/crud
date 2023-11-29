@@ -61,7 +61,7 @@ fun EditMovie(
 	}
 	val selectedRatingText = remember { mutableStateOf(initialMovie!!.rating.toString()) }
 
-	val response by viewModel.insertResponseLiveData.observeAsState()
+	val saveSuccessful by viewModel.saveSuccessfulLiveData.observeAsState()
 
 	Box(modifier = Modifier.fillMaxSize()) {
 		Column(
@@ -75,11 +75,13 @@ fun EditMovie(
 			Spacer(modifier = Modifier.height(15.dp))
 			NameInput(name = name.value, onNameChange = { name.value = it })
 			Spacer(Modifier.height(16.dp))
-			DescriptionInput(description = description.value,
+			DescriptionInput(
+				description = description.value,
 				onDescriptionChange = { description.value = it })
 			Spacer(modifier = Modifier.height(15.dp))
 			Budget(budget = budget.value, onBudgetChanged = { budget.value = it })
-			ReleaseDate(releaseDate = releaseDate.value,
+			ReleaseDate(
+				releaseDate = releaseDate.value,
 				onReleaseDateChanged = { releaseDate.value = it })
 			Spacer(modifier = Modifier.height(15.dp))
 			ActorsInput(actors = actors.value, onActorsChange = { actors.value = it })
@@ -107,8 +109,7 @@ fun EditMovie(
 					context = localContext
 				)
 
-				if (constructedMovie != null
-				) {
+				if (constructedMovie != null) {
 					viewModel.save(
 						constructedMovie
 					)
@@ -116,17 +117,17 @@ fun EditMovie(
 			}
 		}
 
-		if (response != null) {
+		if (saveSuccessful != null) {
 			Text(
 				modifier = Modifier
 					.padding(20.dp)
 					.align(Alignment.Center),
 				fontSize = 19.sp,
-				text = if (response!!.status == "OK") stringResource(id = R.string.saved_success_msg)
+				text = if (saveSuccessful!!) stringResource(id = R.string.saved_success_msg)
 				else stringResource(id = R.string.saved_fail_msg)
 			)
 
-			if (response!!.status == "OK") {
+			if (saveSuccessful!!) {
 				localContext.startActivity(Intent(localContext, ListActivity::class.java))
 			}
 		}
@@ -228,21 +229,18 @@ private fun ReleaseDate(releaseDate: String, onReleaseDateChanged: (String) -> U
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ActorsInput(actors: String, onActorsChange: (String) -> Unit) {
-	TextField(
-		modifier = Modifier
-			.fillMaxWidth()
-			.height(120.dp),
+	TextField(modifier = Modifier
+		.fillMaxWidth()
+		.height(120.dp),
 		colors = TextFieldDefaults.textFieldColors(
-			textColor = Color.Black,
-			containerColor = colorResource(id = R.color.bleak_yellow_light)
+			textColor = Color.Black, containerColor = colorResource(id = R.color.bleak_yellow_light)
 		),
 		value = actors,
 		keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 		onValueChange = { onActorsChange(it) },
 		label = {
 			Text(stringResource(id = R.string.add_new_actors_input_hint))
-		}
-	)
+		})
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -277,7 +275,8 @@ private fun Rating(
 			)
 		)
 
-		ExposedDropdownMenu(modifier = Modifier.fillMaxWidth(),
+		ExposedDropdownMenu(
+			modifier = Modifier.fillMaxWidth(),
 			expanded = isExpanded,
 			onDismissRequest = {
 				onExpandedChanged(false)
@@ -323,15 +322,10 @@ private fun constructMovieIfInputValid(
 	ratingInput: String?,
 	context: Context
 ): Movie? {
-	if (nameInput.isNullOrEmpty() ||
-		descriptionInput.isNullOrEmpty() ||
-		budgetInput.isNullOrEmpty() ||
-		releaseDateInput.isNullOrEmpty() ||
-		actorsInput.isNullOrEmpty() ||
-		ratingInput.isNullOrEmpty()
-	) {
+	if (nameInput.isNullOrEmpty() || descriptionInput.isNullOrEmpty() || budgetInput.isNullOrEmpty() || releaseDateInput.isNullOrEmpty() || actorsInput.isNullOrEmpty() || ratingInput.isNullOrEmpty()) {
 		Toast.makeText(
-			context, context.resources.getString(R.string.movie_all_fields_compulsory_warning),
+			context,
+			context.resources.getString(R.string.movie_all_fields_compulsory_warning),
 			Toast.LENGTH_SHORT
 		).show()
 		return null
@@ -343,7 +337,8 @@ private fun constructMovieIfInputValid(
 		dateFormat.parse(releaseDateInput)
 	} catch (e: ParseException) {
 		Toast.makeText(
-			context, context.resources.getString(R.string.movie_date_format_incorrect_warning),
+			context,
+			context.resources.getString(R.string.movie_date_format_incorrect_warning),
 			Toast.LENGTH_SHORT
 		).show()
 		return null
