@@ -50,7 +50,7 @@ fun MoviesList(
 				.padding(0.dp, 0.dp, 0.dp, 90.dp)
 		) {
 
-			item() {
+			item {
 				Image(
 					painterResource(R.drawable.banner),
 					stringResource(id = R.string.banner_icon),
