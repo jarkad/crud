@@ -35,6 +35,10 @@
 			android:name=".detailedView.DetailsActivity"
 			android:exported="false"
 			android:label="@string/title_activity_details" />
+		<activity
+			android:name=".edit.EditActivity"
+			android:exported="false"
+			android:label="@string/title_activity_edit" />
 	</application>
 
 </manifest>

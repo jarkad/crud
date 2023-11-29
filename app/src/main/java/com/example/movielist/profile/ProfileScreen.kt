@@ -1,5 +1,7 @@
 package com.example.movielist.profile
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,18 +20,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.movielist.data.MovieRepository
 import com.example.movielist.data.dataClasses.Movie
+import com.example.movielist.edit.EditActivity
 
-@Preview
 @Composable
 fun ProfileScreen(
-	viewModel: ProfileScreenViewModel = ProfileScreenViewModel(MovieRepository())
+	viewModel: ProfileScreenViewModel = ProfileScreenViewModel(MovieRepository()),
+	context: Context,
 ) {
 	val movies by viewModel.movies.observeAsState()
 
@@ -56,7 +56,7 @@ fun ProfileScreen(
 		if (!movies.isNullOrEmpty()) {
 			LazyColumn(Modifier.fillMaxWidth()) {
 				items(items = movies!!.toList()) { movie ->
-					Item(movie)
+					Item(movie, context)
 				}
 			}
 		}
@@ -64,7 +64,7 @@ fun ProfileScreen(
 }
 
 @Composable
-private fun Item(movie: Movie) {
+private fun Item(movie: Movie, context: Context) {
 	ElevatedCard {
 		Row {
 			Icon(Icons.Default.Info, null)
@@ -72,7 +72,14 @@ private fun Item(movie: Movie) {
 				Text(movie.name)
 				Text(movie.description)
 				Row {
-					Button(onClick = { /*TODO*/ }) { Text("EDIT") }
+					Button(onClick = {
+						context.startActivity(
+							Intent(
+								context,
+								EditActivity::class.java
+							).putExtra("movieId", movie.id)
+						)
+					}) { Text("EDIT") }
 					Button(onClick = { /*TODO*/ }) { Text("DELETE") }
 				}
 			}
