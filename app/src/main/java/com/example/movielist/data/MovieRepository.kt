@@ -18,6 +18,14 @@ class MovieRepository {
 		return null
 	}
 
+	suspend fun save(movie: Movie) {
+		collection.document(movie.id).set(movie).await()
+	}
+
+	suspend fun delete(movieId: String) {
+		collection.document(movieId).delete().await()
+	}
+
 	suspend fun getMovieById(movieId: String): Movie? {
 		return collection.document(movieId).get().await().toObject(Movie::class.java)
 	}
