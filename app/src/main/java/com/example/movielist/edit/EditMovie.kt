@@ -34,6 +34,7 @@ import com.example.movielist.data.MovieRepository
 import com.example.movielist.data.dataClasses.Movie
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 @Composable
@@ -327,7 +328,7 @@ private fun constructMovieIfInputValid(
 		return null
 	}
 
-	val dateFormat = SimpleDateFormat("YYYY-MM-DD")
+	val dateFormat = SimpleDateFormat("yyyy-MM-DD", Locale.US)
 
 	try {
 		dateFormat.parse(releaseDateInput)
