@@ -8,21 +8,21 @@ import com.example.movielist.data.dataClasses.Movie
 import kotlinx.coroutines.launch
 
 class MovieListViewModel(
-    private val movieRepository: MovieRepository
+	private val movieRepository: MovieRepository
 ) : ViewModel() {
 
-    val moviesLiveData: MutableLiveData<List<Movie>> by lazy {
-        MutableLiveData<List<Movie>>()
-    }
+	val moviesLiveData: MutableLiveData<List<Movie>> by lazy {
+		MutableLiveData<List<Movie>>()
+	}
 
-    init {
-        getAllMovies()
-    }
+	init {
+		getAllMovies()
+	}
 
-    fun getAllMovies() {
-        viewModelScope.launch {
-            val movies = movieRepository.getMovieList()
-            moviesLiveData.value = movies
-        }
-    }
+	private fun getAllMovies() {
+		viewModelScope.launch {
+			val movies = movieRepository.getMovieList()
+			moviesLiveData.value = movies
+		}
+	}
 }
