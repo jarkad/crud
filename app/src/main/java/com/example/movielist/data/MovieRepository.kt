@@ -1,7 +1,6 @@
 package com.example.movielist.data
 
 import com.example.movielist.data.dataClasses.Movie
-import com.example.movielist.data.network.MyResponse
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.tasks.await
@@ -13,9 +12,8 @@ class MovieRepository {
 		return collection.get().await().toObjects(Movie::class.java)
 	}
 
-	suspend fun insertNewMovie(movie: Movie): MyResponse? {
-		collection.add(movie).await()
-		return null
+	suspend fun insertNewMovie(movie: Movie): String {
+		return collection.add(movie).await().id
 	}
 
 	suspend fun save(movie: Movie) {
