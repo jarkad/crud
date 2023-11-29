@@ -54,7 +54,7 @@ fun DetailedView(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column() {
+                Column {
                     if (movie!!.budget != null) {
                         Budget(budget = movie!!.budget!!)
                     }

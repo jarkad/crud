@@ -2,7 +2,7 @@ package com.example.movielist.data.network
 
 import com.google.gson.annotations.SerializedName
 
-open class MyResponse () {
+open class MyResponse {
     @SerializedName("code")
     val code: String = ""
     @SerializedName("status")
