@@ -6,8 +6,9 @@ data class Movie(
 	@DocumentId val id: String = "",
 	val name: String = "",
 	val description: String = "",
-	val actors: List<String> = emptyList(),
-	val budget: Int = 0,
+	val price: Int = 0,
 	val rating: Double = 0.0,
-	val releaseDate: String = "",
+	val category: String = "",
+	val color: String = "",
+	val condition: String = ""
 )

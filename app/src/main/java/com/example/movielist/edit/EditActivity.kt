@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.example.movielist.addNew.EditMovie
 import com.example.movielist.addNew.ui.theme.MovieListTheme
 
 class EditActivity : ComponentActivity() {
@@ -20,8 +21,7 @@ class EditActivity : ComponentActivity() {
 					modifier = Modifier.fillMaxSize(),
 					color = MaterialTheme.colorScheme.background
 				) {
-//					EditMovie(movieId = movieId)
-					EditMovie()
+					EditMovie(movieId = movieId)
 				}
 			}
 		}

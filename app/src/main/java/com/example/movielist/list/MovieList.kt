@@ -1,5 +1,6 @@
 package com.example.movielist.list
 
+import android.view.textclassifier.TextLinks.TextLink
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -14,10 +15,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -36,6 +42,7 @@ import com.example.movielist.data.dataClasses.Movie
 
 val jostFont = FontFamily(Font(R.font.jost_regular))
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoviesList(
 	viewModel: MovieListViewModel = MovieListViewModel(MovieRepository()),
@@ -47,9 +54,20 @@ fun MoviesList(
 		LazyColumn(
 			modifier = Modifier
 				.fillMaxHeight()
-				.padding(0.dp, 0.dp, 0.dp, 90.dp)
+				.padding(0.dp, 0.dp, 0.dp, 0.dp)
 		) {
+			item() {
+				@Composable
+				fun SimpleOutlinedTextFieldSample() {
+					var text by remember { mutableStateOf("") }
 
+					OutlinedTextField(
+						value = text,
+						onValueChange = { text = it },
+						label = { Text("Label") }
+					)
+				}
+			}
 			item() {
 				Image(
 					painterResource(R.drawable.banner),
@@ -104,8 +122,8 @@ fun MovieItem(movie: Movie, onMovieClick: (String) -> Unit) {
 		) {
 			Box(modifier = Modifier.fillMaxWidth()) {
 				Image(
-					painterResource(R.drawable.banner),
-					stringResource(id = R.string.banner_icon),
+					painterResource(R.drawable.banner2),
+					stringResource(id = R.string.banner2_icon),
 					contentScale = ContentScale.Crop,
 					modifier = Modifier
 						.fillMaxWidth()
@@ -113,8 +131,15 @@ fun MovieItem(movie: Movie, onMovieClick: (String) -> Unit) {
 			}
 			Column(modifier = Modifier.padding(12.dp)) {
 				MovieItemName(name = movie.name)
+				if (movie!!.price != null) {
+					Row{
+						MovieItemPrice(price = movie!!.price!!)
+						Text(text = "$")
+					}
+				}
 				if (movie.description.isNotEmpty())
 					MovieItemDesc(desc = movie.description)
+
 			}
 
 		}
@@ -145,3 +170,18 @@ private fun MovieItemDesc(desc: String) {
 		textAlign = TextAlign.Left
 	)
 }
+
+
+@Composable
+private fun MovieItemPrice(price: Int) {
+	Text(
+		text = price.toString(),
+		maxLines = 1,
+		overflow = TextOverflow.Ellipsis,
+		color = Color.Black,
+		fontSize = 20.sp,
+		fontFamily = jostFont,
+		textAlign = TextAlign.Left
+	)
+}
+

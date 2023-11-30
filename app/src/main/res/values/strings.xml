@@ -27,4 +27,16 @@
     <string name="btn_go_search">Search</string>
 	<string name="title_activity_details">Details</string>
 	<string name="title_activity_edit">Edit</string>
+    <string name="banner2_icon">banner2.png</string>
+    <string name="title_activity_add_new_product">Add New Product\n</string>
+    <string name="product_name_input_hint">Enter product name</string>
+    <string name="product_desc_input_hint">Enter product description</string>
+    <string name="product_price_input_hint">Product Price</string>
+    <string name="product_condition_input_hint">Enter Condition of the product</string>
+    <string name="product_color_input_hint">Enter product color</string>
+    <string name="product_category_menu_hint">Choose product category</string>
+    <string name="product_rating_menu_hint">Enter product rating\n</string>
+    <string name="product_success">Successfully created a product</string>
+    <string name="title_activity_edit_new_movie">Edit Movie</string>
+    <string name="title_activity_edit_title">Edit product</string>
 </resources>
